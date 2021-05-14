@@ -16,15 +16,21 @@ Gateway_Node_List.sort(key=cmpfun, reverse=False)
 
 if __name__ == "__main__":
     packets = [L]
-    while(L//5000>0):
-        L %= 5000
-        packets.append(L)
+    LLim = 5000
+    while(True):
+        if L>Llim:
+            L %= Llim
+            packets.append(L)
+        else:
+            
+
     count = 0
     for x in x_axis:
         for y in y_axis:
             for gn in Gateway_Node_List:
                 auv.x = x
                 auv.y = y
+                auv.z = DISTANCE_OPT
                 gn.communicate_acoustic(auv)
                 gn.communicate_optical(auv, DISTANCE)
                 count += 1
