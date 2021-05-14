@@ -14,16 +14,24 @@ for _ in a:
 cmpfun = operator.attrgetter('x')
 Gateway_Node_List.sort(key=cmpfun, reverse=False)
 
-if __name__ == "__main__":
+
+def initializetion(L,R_o,delta_o)
     packets = [L]
     LLim = 5000
     while(True):
         if L>Llim:
             L %= Llim
+            omega_o = 0.97
+            D = L*omega_o*R_o/delta_o
             packets.append(L)
-        else:
-            
+        else:break
+    omega_o = 0.97
+    omega_c = 1-omega_o
+    D = L*omega_o*R_o/delta_o
+    return (omega_o,omega_c,D,len(packets))
 
+if __name__ == "__main__":
+    initialization(L,Llim=5000,R-o,delta_o)
     count = 0
     for x in x_axis:
         for y in y_axis:
