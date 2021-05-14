@@ -76,7 +76,7 @@ class AUV():
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.z = 50
+        self.z = DISTANCE_OPT
 
 class Sensor():
     def __init__(self, x, y, gn):
