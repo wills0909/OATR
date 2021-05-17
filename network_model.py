@@ -69,7 +69,7 @@ def acoustic_consumption():
 
 def get_distance(sensor1, sensor2):
     temp = (sensor1.x - sensor2.x) * (sensor1.x - sensor2.x) + (sensor1.y - sensor2.y) * \
-           (sensor1.y - sensor2.y) 
+           (sensor1.y - sensor2.y) *(sensor1.z - sensor2.z) * (sensor1.z - sensor2.z)
     return math.sqrt(temp)
 
 class AUV():
