@@ -8,7 +8,7 @@ np.random.seed(9999)
 a = np.random.randint(0, Range, size=[NODE_NUMBER, 2])
 Gateway_Node_List = []
 for _ in a:
-    gn = GatewayNode(_[0], _[1])
+    gn = GatewayNode(_[0], _[1],z=50)  # Let z=50 to satisfy the demand of the traditional lawn mower path of AUV and reduce time complexity
     Gateway_Node_List.append(gn)
     
 cmpfun = operator.attrgetter('x')
@@ -33,12 +33,13 @@ def initializetion(L,R_o,delta_o)
 if __name__ == "__main__":
     initialization(L,Llim=5000,R-o,delta_o)
     count = 0
+    auv.z = DISTANCE_OPT
+    # Let auv.z = Optimum distance to satisfy the demand of the traditional lawn mower path of AUV and reduce time complexity.
     for x in x_axis:
         for y in y_axis:
             for gn in Gateway_Node_List:
                 auv.x = x
                 auv.y = y
-                auv.z = DISTANCE_OPT
                 gn.communicate_acoustic(auv)
                 gn.communicate_optical(auv, DISTANCE)
                 count += 1
