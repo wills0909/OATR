@@ -33,4 +33,4 @@ for i in range(len(tmp)):
         num = tmp[i]
         index = i
 # print(index)
-print(root_list[index])
+print('optimum OATR=',root_list[index])
