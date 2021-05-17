@@ -7,7 +7,10 @@ from network_model import *
 # underwater area and the depth is chosen at random between 50 m and 200 m. Monte Carlo 
 # method is conducted and 50 GNs are set up in the experiment.
 NODE_NUMBER = 50  # number of gateway node
-Range = 2000   
+
+Range = 2000   # cube 2000x2000x1600
+height =1600
+
 omega_c = 0.03  # you can change it as you want, notice omega_c+omega_o = 1
 omega_o = 0.97
 L = 1000   # L is the data amount(bit)
