@@ -1,8 +1,8 @@
 from option_parameters import *
 
-# this file is to figure out the relation between total energy consumption with Ratio of acoustic and optical
-# we can change Node number, Data amount:L and the ratio.
-Node_number = 40  # 30, 35, 40, 45, 50
+# This file is to figure out the relationship between total energy consumption with Ratio of acoustic and optical
+# You can change Node number, Data amount:L and the ratio.
+Node_number = 50  # 30, 35, 40, 45, 50
 L = 2000
 DATASIZE_OPTICAL = 1800  # Fig.4b OATR
 AOC = 2000  # Fig.4b AOC
@@ -28,7 +28,7 @@ E_elec = 1e-08  #
 k = 1.5
 f = 10  # 10kHz
 alpha_f = 1.187029939
-# These is the setup of our simulation,don't change this parameters!!!
+# These is the setup of our simulation.Don't change this parameters please!!!
 # ================================================================
 
 
