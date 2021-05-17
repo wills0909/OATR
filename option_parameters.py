@@ -3,9 +3,11 @@ delta_o = 10000000000
 from network_model import *
 # You can change these parameters
 # ==========================================================
-
-NODE_NUMBER = 20  # number of gateway node
-Range = 300   # network range 500 * 500 * 500
+# It is assumed that GNs and SNs are randomly deployed in the 2 km × 2 km × 1.6 km cubic
+# underwater area and the depth is chosen at random between 50 m and 200 m. Monte Carlo 
+# method is conducted and 50 GNs are set up in the experiment.
+NODE_NUMBER = 50  # number of gateway node
+Range = 2000   
 omega_c = 0.03  # you can change it as you want, notice omega_c+omega_o = 1
 omega_o = 0.97
 L = 1000   # L is the data amount(bit)
