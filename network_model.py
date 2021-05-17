@@ -1,7 +1,7 @@
 import math
 import option_parameters
 import numpy as np
-# These is the setup of our simulation,don't change this parameters!!!
+# These is the setup of our simulation.Don't change the parameters!!!
 
 # ==================================================================
 theta_0 = 60 # angle
@@ -22,7 +22,7 @@ E_elec = 1e-08  #
 k = 1.5
 f = 10  # 10kHz
 alpha_f = 1.187029939
-# These is the setup of our simulation,don't change this parameters!!!
+# These is the setup of our simulation.Don't change the parameters!!!
 # ================================================================
 
 def total(l,optical_data):
@@ -73,24 +73,24 @@ def get_distance(sensor1, sensor2):
     return math.sqrt(temp)
 
 class AUV():
-    def __init__(self, x, y):
+    def __init__(self, x, y,z):
         self.x = x
         self.y = y
-        self.z = DISTANCE_OPT
+        self.z = z
 
 class Sensor():
-    def __init__(self, x, y, gn):
+    def __init__(self, x, y,z, gn):
         self.x = x
         self.y = y
-        self.z = 50
+        self.z = z
         self.parent_node = gn
     
 class GatewayNode():
 
-    def __init__(self, x, y):
+    def __init__(self, x, y,z):
         self.x = x
         self.y = y
-        self.z = 50 # let z = 50 to reduce time complexity
+        self.z = z
         self.id = 0
         self.energy_consumption = 0 
         
