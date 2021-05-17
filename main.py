@@ -3,12 +3,12 @@ from option_parameters import *
 
 x_axis = range(Range)
 y_axis = range(Range)
-auv = AUV(0, 0)
+auv = AUV(0, 0, 0)
 np.random.seed(9999)
 a = np.random.randint(0, Range, size=[NODE_NUMBER, 2])
 Gateway_Node_List = []
 for _ in a:
-    gn = GatewayNode(_[0], _[1],z=50)  # Let z=50 to satisfy the demand of the traditional lawn mower path of AUV and reduce time complexity
+    gn = GatewayNode(_[0], _[1],z=50)  # Let gn.z=50 to satisfy the demand of the traditional lawn mower path of AUV and reduce time complexity
     Gateway_Node_List.append(gn)
     
 cmpfun = operator.attrgetter('x')
