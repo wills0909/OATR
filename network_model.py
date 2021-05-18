@@ -1,8 +1,7 @@
 import math
-import option_parameters
 import numpy as np
-# These is the setup of our simulation.Don't change the parameters!!!
-
+import operator
+# These is the setup of our simulation. Don't change the parameters please!!!
 # ==================================================================
 theta_0 = 60 # angle
 theta = 5
@@ -22,8 +21,29 @@ E_elec = 1e-08  #
 k = 1.5
 f = 10  # 10kHz
 alpha_f = 1.187029939
-# These is the setup of our simulation.Don't change the parameters!!!
+# These is the setup of our simulation. Don't change the parameters please!!!
 # ================================================================
+
+# You can change these parameters.
+# ==========================================================
+
+NODE_NUMBER = 50 # Number of gateway node
+Range = 2000   # Network range 2*2*1.6
+Height = 1600
+omega_c = 0.03  # You can change it as you want, notice omega_c+omega_o = 1
+omega_o = 0.97
+L = 2000   # L is the data amount(bit)
+DATASIZE_OPTICAL = omega_o * L # bit
+DATASIZE_ACOUSTIC = omega_c * L # bit
+
+# Optimum distance of optical communication
+STAY_DISTANCE_OPT = omega_o * L * R_o / delta_o
+
+# Not optimum distance, AUV communicates with GN when their distance equals DISTANCE
+STAY_DISTANCE = 60e-03  # Km
+
+# ==========================================================
+# You can change these parameters.
 
 def total(l,optical_data):
     """
@@ -31,22 +51,15 @@ def total(l,optical_data):
     :param optical_data: data optical
     :return: total consumption
     """
-
     L = l
     omega_o = optical_data/L
     omega_c = 1 - omega_o
     exponential = math.exp(Klambda * omega_o * L * R_o / delta_o / math.cos(theta))
-
-
     fraction1 = 2 * math.pow(omega_o * L, 3) * math.pow(R_o, 2) * pi * (1 - math.cos(theta_0)) * P_l / \
                 (math.pow(delta_o, 3)*eta_t * eta_r * A_r * math.cos(theta))
-    
-
     energy_optical = exponential * fraction1 + omega_o * L * E_elec
     print(energy_optical)
-
     fraction2 = omega_c * L * R_c / delta_c
-
     energy_acoustic = omega_c * L * P_i * math.pow(fraction2, k) * math.pow(alpha_f, fraction2) #+  L*P_r
     #print(energy_acoustic)
     return energy_optical + energy_acoustic
@@ -55,25 +68,23 @@ def optical_consumption(distance):
     # L = l
     # omega_o = optical_data / L
     # omega_c = 1 - omega_o
-    exponential = math.exp(Klambda * distance/1000 / math.cos(theta))
-    fraction1 = 2 * math.pow(option_parameters.omega_o * option_parameters.L, 3) * math.pow(R_o, 2) * pi * (1 - math.cos(theta_0)) * P_l / \
+    exponential = math.exp(Klambda * distance / math.cos(theta))
+    fraction1 = 2 * math.pow(omega_o * L, 3) * math.pow(R_o, 2) * pi * (1 - math.cos(theta_0)) * P_l / \
                 (math.pow(delta_o, 3)*eta_t * eta_r * A_r * math.cos(theta))
+    return exponential * fraction1 + omega_o * L * E_elec
 
-    return exponential * fraction1 + option_parameters.omega_o * option_parameters.L * E_elec
-
-def acoustic_consumption():
-
-    fraction2 = option_parameters.omega_c * option_parameters.L * R_c / delta_c
-    energy_acoustic = option_parameters.omega_c * option_parameters.L * P_i * math.pow(fraction2, k) * math.pow(alpha_f, fraction2) # + L*P_r
+def acoustic_consumption(distance):
+    #fraction2 = omega_c * L * R_c / delta_c
+    energy_acoustic = omega_c * L * P_i * math.pow(distance, k) * math.pow(alpha_f, distance) # + L*P_r
     return energy_acoustic
 
 def get_distance(sensor1, sensor2):
     temp = (sensor1.x - sensor2.x) * (sensor1.x - sensor2.x) + (sensor1.y - sensor2.y) * \
-           (sensor1.y - sensor2.y) *(sensor1.z - sensor2.z) * (sensor1.z - sensor2.z)
-    return math.sqrt(temp)
+           (sensor1.y - sensor2.y) +(sensor1.z - sensor2.z)*(sensor1.z - sensor2.z)
+    return math.sqrt(temp)/1000
 
 class AUV():
-    def __init__(self, x, y,z):
+    def __init__(self, x, y, z):
         self.x = x
         self.y = y
         self.z = z
@@ -94,13 +105,35 @@ class GatewayNode():
         self.id = 0
         self.energy_consumption = 0 
         
-    def communicate_acoustic(self,auv):
-        dis = get_distance(auv,self)
-        Radius = option_parameters.omega_c * option_parameters.L * R_c / delta_c
-        if dis<=Radius:
-            self.energy_consumption += acoustic_consumption()
+    def communicate_acoustic(self, distance):
+        Radius = omega_c * L * R_c / delta_c
+        # print(Radius)
+        if distance<=Radius:
+            self.energy_consumption += acoustic_consumption(distance)
     
-    def communicate_optical(self,auv,distance):
-        if abs(get_distance(auv,self)-distance*1000) < 0.01:
-            self.energy_consumption += optical_consumption(distance)
+    def communicate_optical(self, distance):
+        if abs(distance * 1000 - STAY_DISTANCE * 1000) <= 0.01:
+            self.energy_consumption += optical_consumption(STAY_DISTANCE)
+# ==========================================================
+# Initialization
+
+x_axis = range(Range)
+y_axis = range(Range)
+z_axis = range(Height)
+# print(x_axis)
+# print(y_axis)
+# print(z_axis)
+# Auv initialization
+auv = AUV(0, 0, 0)
+# Gateway node initialization through Monte carlo simulation.
+np.random.seed(9999)
+a = np.random.randint(0, Range, size=[NODE_NUMBER, 2])
+#print(a)
+Gateway_Node_List = []
+for _ in a:
+    gn = GatewayNode(_[0], _[1], Height/2)
+    Gateway_Node_List.append(gn)
+
+cmpfun = operator.attrgetter('x')
+Gateway_Node_List.sort(key=cmpfun, reverse=False)
 

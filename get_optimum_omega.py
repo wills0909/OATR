@@ -1,4 +1,4 @@
-from option_parameters import *
+from network_model import *
 
 
 # this code is to calculate the optimum omega_o
