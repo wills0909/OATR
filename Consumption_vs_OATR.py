@@ -1,5 +1,3 @@
-from option_parameters import *
-
 # This file is to figure out the relationship between total energy consumption with Ratio of acoustic and optical
 # You can change Node number, Data amount:L and the ratio.
 Node_number = 50  # 30, 35, 40, 45, 50
