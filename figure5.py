@@ -16,7 +16,7 @@ def initialization(L, R_o, delta_o):
     omega_o = 0.97
     omega_c = 1 - omega_o
     D = L * omega_o * R_o / delta_o
-    return (omega_o, omega_c, D, len(packets))
+    return omega_o, omega_c, D, len(packets)
 
 
 if __name__ == "__main__":
