@@ -1,8 +1,8 @@
-import math
+mport math
 import numpy as np
 import operator
 
-# This is the setup of our simulation. Don't change the parameters please!!!
+# These is the setup of our simulation. Don't change the parameters please!!!
 # ==================================================================
 theta_0 = 60 # angle
 theta = 5
@@ -23,28 +23,25 @@ E_elec = 1e-08  #
 k = 1.5
 f = 10  # 10kHz
 alpha_f = 1.187029939
-# This is the setup of our simulation. Don't change the parameters please!!!
+# These is the setup of our simulation. Don't change the parameters please!!!
 # ================================================================
 
 # You can change these parameters.
 # ==========================================================
 
-NODE_NUMBER = 50 # Number of gateway node
+NODE_NUMBER = 50  # Number of gateway node
 Range = 2000   # Network range 2*2*1.6
 Height = 1600
-L = 4000   # L is the data amount(bit)
+L = 2000   # L is the data amount(bit)
 omega_o = 0
 omega_c = 1-omega_o
-
-
 DATASIZE_OPTICAL = omega_o * L # bit
 DATASIZE_ACOUSTIC = omega_c * L # bit
-
 # Optimum distance of optical communication
 STAY_DISTANCE_OPT = omega_o * L * R_o / delta_o
 
 # Not optimum distance, AUV communicates with GN when their distance equals DISTANCE
-STAY_DISTANCE = 100e-03  # Km
+STAY_DISTANCE = 80e-03  # Km
 
 # ==========================================================
 # You can change these parameters.
@@ -86,6 +83,7 @@ def acoustic_consumption(distance):
     return energy_acoustic
 
 def get_distance(sensor1, sensor2):
+    sensor1.z = sensor2.z + STAY_DISTANCE*1000
     temp = (sensor1.x - sensor2.x) * (sensor1.x - sensor2.x) + (sensor1.y - sensor2.y) * \
            (sensor1.y - sensor2.y) +(sensor1.z - sensor2.z)*(sensor1.z - sensor2.z)
     return math.sqrt(temp)/1000
@@ -142,7 +140,7 @@ class GatewayNode():
         self.x = x
         self.y = y
         self.z = z
-        self.id = 0
+        self.complete = 0
         self.energy_consumption = 0 
         
     def communicate_acoustic(self, distance):
@@ -152,14 +150,15 @@ class GatewayNode():
         self.energy_consumption += acoustic_consumption(distance)
     
     def communicate_optical(self, distance):
-        if abs(distance * 1000 - STAY_DISTANCE * 1000) <= 0.01:
-            self.energy_consumption += optical_consumption(STAY_DISTANCE)
+        # if abs(distance * 1000 - STAY_DISTANCE * 1000) <= 0.01:
+        self.energy_consumption += optical_consumption(STAY_DISTANCE)
+        self.complete = 1
 # ==========================================================
 # Initialization
 
 x_axis = range(Range)
 y_axis = range(Range)
-z_axis = range(50,200)
+z_axis = range(Height)
 # print(x_axis)
 # print(y_axis)
 # print(z_axis)
@@ -174,6 +173,7 @@ for _ in a:
     gn = GatewayNode(_[0], _[1], z)
     Gateway_Node_List.append(gn)
 
-cmpfun = operator.attrgetter('x')
-Gateway_Node_List.sort(key=cmpfun, reverse=False)
-
+# cmpfun = operator.attrgetter('x')
+# Gateway_Node_List.sort(key=cmpfun, reverse=False)
+# for g in Gateway_Node_List:
+#     print(g.x)
