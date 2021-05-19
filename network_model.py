@@ -30,9 +30,11 @@ alpha_f = 1.187029939
 NODE_NUMBER = 50 # Number of gateway node
 Range = 2000   # Network range 2*2*1.6
 Height = 1600
-omega_c = 0.03  # You can change it as you want, notice omega_c+omega_o = 1
-omega_o = 0.97
 L = 2000   # L is the data amount(bit)
+omega_o = getOptOmegao(L)
+omega_c = 1-omega_o  # You can change it as you want, notice omega_c+omega_o = 1
+
+
 DATASIZE_OPTICAL = omega_o * L # bit
 DATASIZE_ACOUSTIC = omega_c * L # bit
 
