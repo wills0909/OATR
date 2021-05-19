@@ -43,9 +43,9 @@ def auv_walk(auv, GNL):
                         auv.x = x
                         auv.y = y
                         dis = nm.get_distance(auv, gn)
-                        if dis <= Stay_Range/1000:
-                            gn.communicate_acoustic(dis)
-                            gn.communicate_optical(dis)
+                        if dis <= Stay_Range/1000:  # Km
+                            gn.communicate_acoustic()
+                            gn.communicate_optical()
 
         else:
             for y in range(2000, 0, -step):
@@ -54,8 +54,8 @@ def auv_walk(auv, GNL):
                         auv.x = x
                         auv.y = y
                         dis = nm.get_distance(auv, gn)
-                        if dis <= Stay_Range/1000:
-                            gn.communicate_acoustic(dis)
-                            gn.communicate_optical(dis)
+                        if dis <= Stay_Range/1000: # Km
+                            gn.communicate_acoustic()
+                            gn.communicate_optical()
 
 
