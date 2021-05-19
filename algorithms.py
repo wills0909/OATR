@@ -34,7 +34,7 @@ def auv_walk(auv, GNL):
     #     gn.communicate_acoustic(dis)
     #     gn.communicate_optical(dis)
 
-    # The traditional lawn mower path of AUV and reduce time complexity.
+    # To satisfy the demand of traditional lawn mower path of AUV and reduce time complexity.
     for x in range(0, 2000, step):
         if x % 2 == 0:
             for y in range(0, 2000, step):
