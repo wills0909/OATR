@@ -147,7 +147,7 @@ class GatewayNode():
         # Radius = omega_c * L * R_c / delta_c
         # # print(Radius)
         # if abs(distance*-Radius)*1000 <= 0.01:
-        self.energy_consumption += acoustic_consumption(distance)
+        self.energy_consumption += acoustic_consumption(STAY_DISTANCE)
     
     def communicate_optical(self, distance):
         # if abs(distance * 1000 - STAY_DISTANCE * 1000) <= 0.01:
