@@ -14,4 +14,4 @@ if __name__ == "__main__":
     for gn in Gateway_Node_List:
         total += gn.energy_consumption
         break
-    print("Data amount=", L, 'bit   ', "total consumption=", total, 'J')
+    print("Data amount=", L, 'bit   ', "One GN's consumption=", total, 'J')
