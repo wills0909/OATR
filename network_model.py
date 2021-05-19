@@ -12,7 +12,7 @@ R_c = 1.5  # 1.5km/s
 P_l = 30  # 30w
 P_i = 0.0002  # 0. 0002w
 P_r = 0.000035
-z = np.random.randint(0, 1600)
+z = np.random.randint(50, 200)
 Klambda = 0.398  # 0.398
 delta_o = 1e10  # 10000000000bps
 delta_c = 1e4 # 10000bps
@@ -159,7 +159,7 @@ class GatewayNode():
 
 x_axis = range(Range)
 y_axis = range(Range)
-z_axis = range(Height)
+z_axis = range(50,200)
 # print(x_axis)
 # print(y_axis)
 # print(z_axis)
