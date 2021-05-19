@@ -1,7 +1,7 @@
 from network_model import *
 
 
-# These Lagrangian function and KKT conditions are used to calculate the partial derivative.
+# The Lagrangian function and KKT conditions are used to calculate the partial derivative.
 def partialDerivative(o, data_amount):
     L = data_amount
     part1 = (6 * o * o * math.pow(L, 3) * math.pow(R_o, 2) * pi * (1 - math.cos(theta_0)) * P_l
