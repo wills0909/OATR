@@ -8,12 +8,12 @@ def initialization(L, R_o, delta_o):
     while (True):
         if L > LLim:
             L %= LLim
-            omega_o = 0.97
+            omega_o = getOptOmegao(L)
             D = L * omega_o * R_o / delta_o
             packets.append(L)
         else:
             break
-    omega_o = 0.97
+    omega_o = getOptOmegao(L)
     omega_c = 1 - omega_o
     D = L * omega_o * R_o / delta_o
     return omega_o, omega_c, D, len(packets)
