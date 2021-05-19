@@ -2,7 +2,7 @@ import math
 import numpy as np
 import operator
 
-# These is the setup of our simulation. Don't change the parameters please!!!
+# This is the setup of our simulation. Don't change the parameters please!!!
 # ==================================================================
 theta_0 = 60 # angle
 theta = 5
@@ -22,7 +22,7 @@ E_elec = 1e-08  #
 k = 1.5
 f = 10  # 10kHz
 alpha_f = 1.187029939
-# These is the setup of our simulation. Don't change the parameters please!!!
+# This is the setup of our simulation. Don't change the parameters please!!!
 # ================================================================
 
 # You can change these parameters.
