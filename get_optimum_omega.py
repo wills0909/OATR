@@ -1,7 +1,7 @@
 from network_model import *
 
 
-# This function is to calculate the partial derivative.
+# The Lagrangian function and KKT conditions are used to calculate the partial derivative.
 def partialDerivative(o, data_amount):
     L = data_amount
     part1 = (6 * o * o * math.pow(L, 3) * math.pow(R_o, 2) * pi * (1 - math.cos(theta_0)) * P_l
@@ -17,6 +17,7 @@ def partialDerivative(o, data_amount):
             * math.pow(alpha_f, (1 - o) * L * R_c / delta_c) * math.log(alpha_f)
 
     return part1 + part2 + part3 - part4
+
 
 # This function is to find the optimum optical ratio.
 def getOptOmegao(data_amount):
