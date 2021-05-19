@@ -31,7 +31,7 @@ alpha_f = 1.187029939
 NODE_NUMBER = 50 # Number of gateway node
 Range = 2000   # Network range 2*2*1.6
 Height = 1600
-L = 2000   # L is the data amount(bit)
+L = 4000   # L is the data amount(bit)
 omega_o = 0
 omega_c = 1-omega_o
 
