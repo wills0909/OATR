@@ -22,8 +22,8 @@ def initialization(L, R_o, delta_o):
 
 # Algorithm 2: AUV communicates with GNs.
 def auv_walk(auv, GNL):
-    step = 10
-    Stay_Range = 150
+    step = 10  # m
+    Stay_Range = 150  # m
     cmpfun = operator.attrgetter('y')
     GNL.sort(key=cmpfun, reverse=True)
     # for gn in GNL:
