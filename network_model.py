@@ -12,6 +12,7 @@ R_c = 1.5  # 1.5km/s
 P_l = 30  # 30w
 P_i = 0.0002  # 0. 0002w
 P_r = 0.000035
+z = np.random.randint(0, 1600)
 Klambda = 0.398  # 0.398
 delta_o = 1e10  # 10000000000bps
 delta_c = 1e4 # 10000bps
@@ -170,7 +171,7 @@ a = np.random.randint(0, Range, size=[NODE_NUMBER, 2])
 #print(a)
 Gateway_Node_List = []
 for _ in a:
-    gn = GatewayNode(_[0], _[1], Height/2)
+    gn = GatewayNode(_[0], _[1], z)
     Gateway_Node_List.append(gn)
 
 cmpfun = operator.attrgetter('x')
