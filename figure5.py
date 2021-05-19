@@ -14,4 +14,5 @@ if __name__ == "__main__":
     print("input stay distance =", STAY_DISTANCE * 1000, "m")
     for gn in Gateway_Node_List:
         total += gn.energy_consumption
+        break
     print("Data amount=", L, 'bit   ', "total consumption=", total, 'J')
