@@ -3,7 +3,6 @@ from algorithms import *
 
 if __name__ == "__main__":
     initialization(L, R_o, delta_o)
-    count = 0
     omega_o = getOptOmegao(L)
     omega_c = 1 - omega_o
     # AUV starts moving.
