@@ -28,10 +28,10 @@ alpha_f = 1.187029939
 # You can change these parameters.
 # ==========================================================
 
-NODE_NUMBER = 10 # Number of gateway node
-Range = 200   # Network range 2*2*1.6
-Height = 160
-L = 1000   # L is the data amount(bit)
+NODE_NUMBER = 50 # Number of gateway node
+Range = 2000   # Network range 2*2*1.6
+Height = 1600
+L = 2000   # L is the data amount(bit)
 omega_o = 0
 omega_c = 1-omega_o
 
